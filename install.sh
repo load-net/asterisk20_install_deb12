@@ -174,6 +174,6 @@ sed -i 's/;rungroup = asterisk/rungroup = asterisk/' /etc/asterisk/asterisk.conf
 sleep 1
 ldconfig -v
 sleep 1
-systemctl start asterisk && systemctl enable asterisk && systemctl status asterisk
+systemctl start asterisk && systemctl enable asterisk 
 sleep 1
 asterisk -rvvvvvvvvvvv
