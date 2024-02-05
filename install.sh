@@ -22,6 +22,7 @@ echo #######
 echo #######
 echo #######
 sleep 2
+cd /usr/src/asterisk-20.6.0/
 menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
 		--enable chan_rtp \
