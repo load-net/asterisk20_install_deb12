@@ -149,7 +149,6 @@ menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable res_chan_stats \
 		--enable res_config_ldap \
 		--enable res_config_pgsql \
-		--enable res_config_sqlite \
 		--enable res_corosync \
 		--enable res_endpoint_stats \
 		--enable res_snmp \
@@ -171,7 +170,12 @@ chown -R asterisk: /var/{lib,log,run,spool}/asterisk /usr/lib/asterisk /etc/aste
 sleep 1
 sed -i 's/;runuser = asterisk/runuser = asterisk/' /etc/asterisk/asterisk.conf
 sed -i 's/;rungroup = asterisk/rungroup = asterisk/' /etc/asterisk/asterisk.conf
+
+sed -i 's";\[radius\]"\[radius\]"g' /etc/asterisk/cdr.conf
+sed -i 's";radiuscfg => /usr/local/etc/radiusclient-ng/radiusclient.conf"radiuscfg => /etc/radcli/radiusclient.conf"g' /etc/asterisk/cdr.conf
+sed -i 's";radiuscfg => /usr/local/etc/radiusclient-ng/radiusclient.conf"radiuscfg => /etc/radcli/radiusclient.conf"g' /etc/asterisk/cel.conf
 sleep 1
+systemctl restart asterisk
 ldconfig -v
 sleep 1
 systemctl start asterisk && systemctl enable asterisk 
