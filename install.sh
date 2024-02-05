@@ -162,7 +162,6 @@ menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable EXTRA-SOUNDS-EN-WAV \
 		menuselect.makeopts
 sleep 1
-./configure --libdir=/usr/lib64 --with-crypto --with-ssl=ssl --with-srtp --with-pjproject-bundled
 sleep 1
 make -j4 && make install && make samples && make config && ldconfig
 sleep 1
