@@ -8,4 +8,4 @@ cd /usr/src/asterisk20_install_deb12/
 
 chmod +x /usr/src/asterisk20_install_deb12/install.sh
 
-./usr/src/asterisk20_install_deb12/install.sh
+./install.sh
