@@ -4,7 +4,7 @@ tar xzvf /usr/src/asterisk-20-current.tar.gz
 cd /usr/src/asterisk-20.6.0/
 contrib/scripts/install_prereq install
 sleep 1
-./configure --libdir=/usr/lib64 --with-pjproject-bundled
+./configure --with-pjproject-bundled
 sleep 1
 cd /usr/src/asterisk-20.6.0/
 menuselect/menuselect --disable BUILD_NATIVE --disable-all \
@@ -166,9 +166,9 @@ sleep 1
 sleep 1
 make -j4 && make install && make samples && make config && ldconfig
 sleep 1
-adduser --system --group --home /usr/lib64/asterisk --no-create-home --gecos "Asterisk" asterisk
+adduser --system --group --home /var/lib/asterisk --no-create-home --gecos "Asterisk" asterisk
 usermod -a -G dialout,audio asterisk
-chown -R asterisk: /var/{lib,log,run,spool}/asterisk /usr/lib64/asterisk /etc/asterisk
+chown -R asterisk: /var/{lib,log,run,spool}/asterisk /usr/lib/asterisk /etc/asterisk
 sleep 1
 sed -i 's/;runuser = asterisk/runuser = asterisk/' /etc/asterisk/asterisk.conf
 sed -i 's/;rungroup = asterisk/rungroup = asterisk/' /etc/asterisk/asterisk.conf
