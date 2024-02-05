@@ -6,6 +6,7 @@ contrib/scripts/install_prereq install
 sleep 1
 ./configure --libdir=/usr/lib64 --with-pjproject-bundled
 sleep 1
+cd /usr/src/asterisk-20.6.0/
 menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
 		--enable chan_rtp \
