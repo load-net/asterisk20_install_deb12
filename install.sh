@@ -18,7 +18,10 @@ do
     echo -n "."
     sleep 2
 done
-
+echo #######
+echo #######
+echo #######
+sleep 2
 menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
 		--enable chan_rtp \
