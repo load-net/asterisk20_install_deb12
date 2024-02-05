@@ -5,11 +5,25 @@ cd /usr/src/asterisk-20.6.0/
 contrib/scripts/install_prereq install
 echo ################ ./configure --with-pjproject-bundled ###################################
 cd /usr/src/asterisk-20.6.0/
-	&& yes | contrib/scripts/install_prereq install \
-	&& contrib/scripts/install_prereq test \
-	&& ./bootstrap.sh && ./configure --with-pjproject-bundled \
-	&& make menuselect.makeopts \
-	&& menuselect/menuselect
+./configure --with-pjproject-bundled
+echo ####################### menuselect ###################################
+for ((i=0; i<5; i++))
+do
+    echo -n "#"
+    sleep 2
+done
+cd /usr/src/asterisk-20.6.0/
+for ((i=0; i<5; i++))
+do
+    echo -n "."
+    sleep 2
+done
+echo #######
+echo #######
+echo #######
+sleep 2
+cd /usr/src/asterisk-20.6.0/
+menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
 		--enable chan_rtp \
