@@ -3,11 +3,12 @@ wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20-current.ta
 tar xzvf /usr/src/asterisk-20-current.tar.gz
 cd /usr/src/asterisk-20.6.0/
 contrib/scripts/install_prereq install
-sleep 1
+echo ################ ./configure --with-pjproject-bundled ###################################
 ./configure --with-pjproject-bundled
+echo ####################### menuselect ###################################
 for ((i=0; i<5; i++))
 do
-    echo -n "."
+    echo -n "#"
     sleep 2
 done
 cd /usr/src/asterisk-20.6.0/
@@ -16,6 +17,7 @@ do
     echo -n "."
     sleep 2
 done
+
 menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable chan_bridge_media \
 		--enable chan_rtp \
@@ -169,16 +171,19 @@ menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		--enable CORE-SOUNDS-RU-WAV \
 		--enable EXTRA-SOUNDS-EN-WAV \
 		menuselect.makeopts
+
+echo ################### make ###################################
 for ((i=0; i<5; i++))
 do
     echo -n "."
     sleep 2
 done
 make -j4 && make install && make samples && make config && ldconfig
-sleep 1
+
 adduser --system --group --home /var/lib/asterisk --no-create-home --gecos "Asterisk" asterisk
 usermod -a -G dialout,audio asterisk
 chown -R asterisk: /var/{lib,log,run,spool}/asterisk /usr/lib/asterisk /etc/asterisk
+echo ################### Накатили права ###################################
 for ((i=0; i<5; i++))
 do
     echo -n "."
@@ -186,15 +191,10 @@ do
 done
 sed -i 's/;runuser = asterisk/runuser = asterisk/' /etc/asterisk/asterisk.conf
 sed -i 's/;rungroup = asterisk/rungroup = asterisk/' /etc/asterisk/asterisk.conf
-for ((i=0; i<5; i++))
-do
-    echo -n "."
-    sleep 2
-done
 sed -i 's";\[radius\]"\[radius\]"g' /etc/asterisk/cdr.conf
 sed -i 's";radiuscfg => /usr/local/etc/radiusclient-ng/radiusclient.conf"radiuscfg => /etc/radcli/radiusclient.conf"g' /etc/asterisk/cdr.conf
 sed -i 's";radiuscfg => /usr/local/etc/radiusclient-ng/radiusclient.conf"radiuscfg => /etc/radcli/radiusclient.conf"g' /etc/asterisk/cel.conf
-sleep 1
+echo ################### ПОЧТИ ВСЕ ###################################
 systemctl restart asterisk
 ldconfig -v
 for ((i=0; i<5; i++))
