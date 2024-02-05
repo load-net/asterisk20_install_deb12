@@ -1,7 +1,7 @@
 cd /usr/src
 wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-20-current.tar.gz
 tar xzvf /usr/src/asterisk-20-current.tar.gz
-cd asterisk-20.6.0/
+cd /usr/src/asterisk-20.6.0/
 contrib/scripts/install_prereq install
 sleep 1
 ./configure --libdir=/usr/lib64 --with-crypto --with-ssl=ssl --with-srtp --with-pjproject-bundled
