@@ -4,6 +4,7 @@ tar xzvf /usr/src/asterisk-20-current.tar.gz
 cd /usr/src/asterisk-20.6.0/
 contrib/scripts/install_prereq install
 echo ################ ./configure --with-pjproject-bundled ###################################
+cd /usr/src/asterisk-20.6.0/
 ./configure --with-pjproject-bundled
 echo ####################### menuselect ###################################
 for ((i=0; i<5; i++))
