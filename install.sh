@@ -173,11 +173,36 @@ menuselect/menuselect --disable BUILD_NATIVE --disable-all \
 		menuselect.makeopts
 
 echo ################### make ###################################
-for ((i=0; i<5; i++))
+
+total=50
+progress=0
+
+while [ $progress -lt $total ]
 do
-    echo -n "."
-    sleep 2
+    # Вычисляем процент выполнения
+    percent=$((progress * 100 / total))
+    
+    # Определяем количество символов заполнения
+    filled=$((progress * 20 / total))
+    
+    # Выводим прогресс-бар
+    echo -n " $percent% ["
+    for ((i=0; i<filled; i++))
+    do
+        echo -n "#"
+    done
+    echo -n "]"
+    
+    # Увеличиваем прогресс
+    progress=$((progress + 1))
+    
+    # Задержка в 0.1 секунду
+    sleep 0.1
+    
+    # Возвращаемся в начало строки
+    echo -ne "\r"
 done
+
 make -j4 && make install && make samples && make config && ldconfig
 
 adduser --system --group --home /var/lib/asterisk --no-create-home --gecos "Asterisk" asterisk
@@ -196,7 +221,7 @@ sed -i 's";radiuscfg => /usr/local/etc/radiusclient-ng/radiusclient.conf"radiusc
 sed -i 's";radiuscfg => /usr/local/etc/radiusclient-ng/radiusclient.conf"radiuscfg => /etc/radcli/radiusclient.conf"g' /etc/asterisk/cel.conf
 echo ################### ПОЧТИ ВСЕ ###################################
 systemctl restart asterisk
-ldconfig -v
+
 for ((i=0; i<5; i++))
 do
     echo -n "."
